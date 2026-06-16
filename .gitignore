@@ -1,0 +1,51 @@
+# Build artifacts
+backend/**/bin/
+backend/**/obj/
+backend/**/auth.db
+backend/**/test-auth.db
+backend/LabelVerification.Api/wwwroot/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+coverage/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+credentials.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.user
+*.suo
+
+# Logs and deploy scratch
+*.log
+npm-debug.log*
+pnpm-debug.log*
+azure-logs/
+azure-logs-latest/
+azure-logs*.zip
+deploy*.log
+docker-build*.log
+diag-jack.csx
+
+# TypeScript
+*.tsbuildinfo
+
+# Test scratch HTML in scripts
+scripts/_ttb_*
+
+# OCR debug scratch images
+tmp-*.png
+tmp-*.jpg
+
+# SQLite WAL
+*.db-shm
+*.db-wal

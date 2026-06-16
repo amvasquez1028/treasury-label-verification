@@ -1,0 +1,24 @@
+services:
+  label-verify-plan:
+    build: .
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://0.0.0.0:8082
+      DISABLE_PUBLIC_REGISTRATION: "${DISABLE_PUBLIC_REGISTRATION:-true}"
+      SEED_DEMO_USERS: "${SEED_DEMO_USERS:-false}"
+      DEMO_AGENT_PASSWORD: "${DEMO_AGENT_PASSWORD:-}"
+      DEMO_PARALLEL_PASSWORD: "${DEMO_PARALLEL_PASSWORD:-}"
+      AUTH_DB_PATH: "${AUTH_DB_PATH:-/data/auth.db}"
+      OCR_MAX_PARALLEL: "2"
+      ConnectionStrings__Auth: Data Source=/data/auth.db
+      SendGrid__ApiKey: ${SendGrid__ApiKey:-}
+      SendGrid__PublicBaseUrl: http://localhost:8082
+    volumes:
+      - label-verify-plan-data:/data
+
+volumes:
+  label-verify-plan-data:

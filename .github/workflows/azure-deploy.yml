@@ -1,0 +1,71 @@
+name: Azure Deploy — Label Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_name:
+        description: Azure Web App name (globally unique)
+        required: true
+        default: label-verify-trackc
+      resource_group:
+        description: Azure resource group
+        required: true
+        default: label-verify-rg
+
+env:
+  IMAGE_NAME: label-verify-trackc
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Download tessdata
+        working-directory: treasury-label-verification-plan
+        run: |
+          mkdir -p tessdata
+          curl -fsSL -o tessdata/eng.traineddata \
+            https://github.com/tesseract-ocr/tessdata/raw/main/eng.traineddata
+
+      - name: Login to ACR
+        run: az acr login --name ${{ secrets.AZURE_ACR_NAME }}
+
+      - name: Build and push container
+        working-directory: treasury-label-verification-plan
+        run: |
+          IMAGE=${{ secrets.AZURE_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
+      - name: Configure Web App
+        run: |
+          az webapp config container set \
+            --resource-group ${{ github.event.inputs.resource_group }} \
+            --name ${{ github.event.inputs.app_name }} \
+            --docker-custom-image-name "$IMAGE" \
+            --docker-registry-server-url "https://${{ secrets.AZURE_ACR_NAME }}.azurecr.io" \
+            --docker-registry-server-user "${{ secrets.AZURE_ACR_USERNAME }}" \
+            --docker-registry-server-password "${{ secrets.AZURE_ACR_PASSWORD }}"
+          az webapp config appsettings set \
+            --resource-group ${{ github.event.inputs.resource_group }} \
+            --name ${{ github.event.inputs.app_name }} \
+            --settings \
+              WEBSITES_PORT=8082 \
+              ASPNETCORE_URLS=http://0.0.0.0:8082 \
+              Ocr__TessDataPath=/app/tessdata \
+              Ocr__TimeoutSeconds=30 \
+              OCR_MAX_PARALLEL=2 \
+              SEED_DEMO_USERS=true \
+              DISABLE_PUBLIC_REGISTRATION=true \
+              DEMO_AGENT_PASSWORD="${{ secrets.DEMO_AGENT_PASSWORD }}" \
+              SendGrid__PublicBaseUrl=https://${{ github.event.inputs.app_name }}.azurewebsites.net
+          az webapp restart \
+            --resource-group ${{ github.event.inputs.resource_group }} \
+            --name ${{ github.event.inputs.app_name }}

@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-public-sans: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --color-primary-darker: #1a4480;
+  --color-primary-dark: #2c608a;
+  --color-accent-gold: #c9a227;
+  --color-accent-warm: #8b6914;
+  --color-accent-cool-lightest: #e1f3f8;
+  --color-base-lightest: #f0f0f0;
+  --color-base-lighter: #dfe1e2;
+  --color-base: #71767a;
+  --color-base-dark: #565c65;
+  --color-base-darkest: #1b1b1b;
+  --color-verdict-green: #056608;
+  --color-verdict-yellow: #9a7b00;
+  --color-verdict-red: #b32134;
+}
+
+body {
+  font-family: var(--font-public-sans);
+  background: var(--color-base-lightest);
+  color: var(--color-base-darkest);
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-darker) 0%,
+    #2c5282 45%,
+    var(--color-accent-warm) 85%,
+    var(--color-accent-gold) 100%
+  );
+}
+
+.parameter-card {
+  @apply rounded-lg border border-[var(--color-base-lighter)] bg-white p-6 shadow-sm;
+}
+
+.site-footer a {
+  @apply transition-colors;
+}
+
+.form-field {
+  @apply text-[var(--color-base)] placeholder:text-[var(--color-base)];
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.form-field:focus {
+  color: var(--color-base-darkest);
+}
+
+.form-field-edited {
+  @apply text-[var(--color-base-darkest)];
+}
+
+.form-field-single-row {
+  resize: none;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  line-height: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.form-field-grow {
+  resize: none;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  min-height: 2.5rem;
+  line-height: 1.25rem;
+}
+
+.verdict-badge-pass {
+  background-color: var(--color-verdict-green);
+  border-color: var(--color-verdict-green);
+  color: #ffffff;
+}
+
+.verdict-badge-review {
+  background-color: var(--color-verdict-yellow);
+  border-color: var(--color-verdict-yellow);
+  color: #ffffff;
+}
+
+.verdict-badge-fail {
+  background-color: var(--color-verdict-red);
+  border-color: var(--color-verdict-red);
+  color: #ffffff;
+}
+
+.verdict-badge-unreadable {
+  background-color: #4a5568;
+  border-color: #4a5568;
+  color: #ffffff;
+}

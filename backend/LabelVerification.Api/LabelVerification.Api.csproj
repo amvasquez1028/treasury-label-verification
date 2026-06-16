@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\LabelVerification.Core\LabelVerification.Core.csproj" />
+    <ProjectReference Include="..\LabelVerification.Infrastructure\LabelVerification.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="OpenCvSharp4.runtime.linux-x64" Version="4.10.0.20240717" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\tessdata\**\*" CopyToOutputDirectory="PreserveNewest" Link="tessdata\%(RecursiveDir)%(Filename)%(Extension)" Condition="Exists('..\..\tessdata\eng.traineddata')" />
+    <Content Include="..\..\..\treasury-label-verification\tessdata\**\*" CopyToOutputDirectory="PreserveNewest" Link="tessdata\%(RecursiveDir)%(Filename)%(Extension)" Condition="Exists('..\..\..\treasury-label-verification\tessdata\eng.traineddata')" />
+    <Content Include="..\..\testdata\colas\*.meta.json" CopyToOutputDirectory="PreserveNewest" Link="testdata\colas\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

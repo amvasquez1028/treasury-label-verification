@@ -1,0 +1,107 @@
+name: CI — Label Verification
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+env:
+  Ocr__FlatArtworkEnginePoolSize: "6"
+  Ocr__UseFieldBandTargetedOcr: "true"
+  Ocr__FlatArtworkMaxOcrSide: "1200"
+  Ocr__PerLabelWallClockMs: "6000"
+  Ocr__SubmissionGradeTargetMs: "3500"
+  Ocr__TimeoutSeconds: "8"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install native OCR dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr libtesseract-dev libleptonica-dev
+
+      - name: Download tessdata
+        run: |
+          mkdir -p tessdata
+          curl -fsSL -o tessdata/eng.traineddata \
+            https://github.com/tesseract-ocr/tessdata/raw/main/eng.traineddata
+
+      - name: Generate fixtures
+        run: |
+          pnpm install
+          node scripts/generate-test-labels.mjs
+          node scripts/generate-old-tom-fixture.mjs
+          node scripts/setup-reviewer-pack.mjs
+
+      - name: dotnet test (full suite, Linux OCR)
+        working-directory: backend
+        run: dotnet test --configuration Release
+
+      - name: pnpm build
+        run: pnpm build
+
+  playwright-smoke:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install native OCR dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr libtesseract-dev libleptonica-dev
+
+      - name: Download tessdata
+        run: |
+          mkdir -p tessdata
+          curl -fsSL -o tessdata/eng.traineddata \
+            https://github.com/tesseract-ocr/tessdata/raw/main/eng.traineddata
+
+      - name: Install dependencies and build app
+        run: |
+          pnpm install
+          node scripts/setup-reviewer-pack.mjs
+          pnpm build
+          dotnet build backend/LabelVerification.Api/LabelVerification.Api.csproj --configuration Release
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Playwright smoke (login → samples → standard verify Jack)
+        env:
+          DEMO_AGENT_PASSWORD: LocalTestPassword1!
+          DEMO_PARALLEL_PASSWORD: LocalTestPassword1!
+          SEED_DEMO_USERS: "true"
+        run: pnpm run test:e2e

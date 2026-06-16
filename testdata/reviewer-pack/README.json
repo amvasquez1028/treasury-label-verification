@@ -1,0 +1,126 @@
+{
+  "description": "Five demo samples for Load samples: 2 mismatch bottle photos and 3 Texas ODP Approved Product Label Search File Link embedded label images.",
+  "approvedLabelSearchUrl": "https://data.texas.gov/dataset/Approved-Product-Label-Search/2cjh-3vae/data_preview",
+  "items": [
+    {
+      "file": "01-mismatch-act-of-treason.png",
+      "ttbId": "21194001000323",
+      "label": "Act of Treason — real bottle photo (photo ≠ Texas ODP File Link product)",
+      "sampleKind": "mismatch_bottle_photo",
+      "fancifulName": "BLANCO",
+      "expectedLabelFields": {
+        "brandName": "ACT OF TREASON",
+        "fancifulName": "BLANCO",
+        "classTypeDesignation": "AUSTRALIAN AGAVE SPIRIT",
+        "abvPercent": 40,
+        "netContents": "700 mL",
+        "bottlerProducerAddress": "Top Shelf International, Queensland, Australia",
+        "countryOfOrigin": "Australia",
+        "productCategory": "distilled_spirits",
+        "labelPresentation": "realBottleFrontWithWarningCheck",
+        "ttbWarningText": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+        "boldWarningPhrase": "GOVERNMENT WARNING:"
+      },
+      "expectVerificationPass": false,
+      "approvedLabelSearchUrl": "https://data.texas.gov/dataset/Approved-Product-Label-Search/2cjh-3vae",
+      "tabcApprovedLabelFileLink": "https://storage.googleapis.com/tabc-public-labels/6be0d0029604bb7dc417061306e355e1.pdf",
+      "userPhotoMatchesTabcRow": false
+    },
+    {
+      "file": "02-mismatch-juniper-tree-gin.png",
+      "ttbId": "18055001000023",
+      "label": "The Juniper Tree Gin — real bottle photo (photo ≠ Texas ODP File Link product)",
+      "sampleKind": "mismatch_bottle_photo",
+      "fancifulName": "BOUQUET OF DESERT FLOWERS",
+      "expectedLabelFields": {
+        "brandName": "THE JUNIPER TREE",
+        "fancifulName": "BOUQUET OF DESERT FLOWERS",
+        "classTypeDesignation": "GIN",
+        "abvPercent": 47,
+        "netContents": "500 mL",
+        "bottlerProducerAddress": "THE HOUSE OF PORFIDIO",
+        "countryOfOrigin": "Mexico",
+        "productCategory": "distilled_spirits",
+        "labelPresentation": "realBottleFrontWithWarningCheck",
+        "ttbWarningText": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+        "boldWarningPhrase": "GOVERNMENT WARNING:"
+      },
+      "expectVerificationPass": false,
+      "approvedLabelSearchUrl": "https://data.texas.gov/dataset/Approved-Product-Label-Search/2cjh-3vae",
+      "tabcApprovedLabelFileLink": "https://storage.googleapis.com/tabc-public-labels/4828afd14920996e06844339fcb22ad4.pdf",
+      "userPhotoMatchesTabcRow": false
+    },
+    {
+      "file": "03-odp-ambhar-plata.png",
+      "ttbId": "14106001000237",
+      "label": "Ambhar Plata Tequila — Texas ODP approved label (File Link)",
+      "sampleKind": "odp_approved_label",
+      "fancifulName": "PLATA",
+      "expectedLabelFields": {
+        "brandName": "AMBHAR",
+        "fancifulName": "PLATA",
+        "classTypeDesignation": "TEQUILA",
+        "abvPercent": 40,
+        "netContents": "750 mL",
+        "bottlerProducerAddress": "Imported by Ambhar Global Spirits, LLC",
+        "countryOfOrigin": "Mexico",
+        "productCategory": "distilled_spirits",
+        "labelPresentation": "fullLabel",
+        "ttbWarningText": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+        "boldWarningPhrase": "GOVERNMENT WARNING:"
+      },
+      "expectVerificationPass": true,
+      "approvedLabelSearchUrl": "https://data.texas.gov/dataset/Approved-Product-Label-Search/2cjh-3vae",
+      "tabcApprovedLabelFileLink": "https://storage.googleapis.com/tabc-public-labels/3d96ef65a9b66538b4d19c16cff3ffd7.pdf",
+      "userPhotoMatchesTabcRow": true
+    },
+    {
+      "file": "04-odp-la-venenosa-raicilla.png",
+      "ttbId": "14086001000323",
+      "label": "La Venenosa Raicilla — Texas ODP approved label (File Link)",
+      "sampleKind": "odp_approved_label",
+      "fancifulName": "RAICILLA",
+      "expectedLabelFields": {
+        "brandName": "LA VENENOSA",
+        "fancifulName": "RAICILLA",
+        "classTypeDesignation": "RAICILLA",
+        "abvPercent": 42,
+        "netContents": "750 mL",
+        "bottlerProducerAddress": "Imported by Fidencio Spirits",
+        "countryOfOrigin": "Mexico",
+        "productCategory": "distilled_spirits",
+        "labelPresentation": "fullLabel",
+        "ttbWarningText": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+        "boldWarningPhrase": "GOVERNMENT WARNING:"
+      },
+      "expectVerificationPass": true,
+      "approvedLabelSearchUrl": "https://data.texas.gov/dataset/Approved-Product-Label-Search/2cjh-3vae",
+      "tabcApprovedLabelFileLink": "https://storage.googleapis.com/tabc-public-labels/814b3a1436668720fb9a508cc0390726.pdf",
+      "userPhotoMatchesTabcRow": true
+    },
+    {
+      "file": "05-odp-jack-daniels-old-no7.png",
+      "ttbId": "13343001000271",
+      "label": "Jack Daniel's Old No. 7 — Texas ODP approved label (File Link)",
+      "sampleKind": "odp_approved_label",
+      "fancifulName": "Old No. 7 BRAND",
+      "expectedLabelFields": {
+        "brandName": "JACK DANIEL",
+        "fancifulName": "Old No. 7 Brand",
+        "classTypeDesignation": "Whiskey",
+        "abvPercent": 40,
+        "netContents": "375 mL",
+        "bottlerProducerAddress": "Jack Daniel Distillery, Lynchburg, Tenn. USA",
+        "countryOfOrigin": "United States",
+        "productCategory": "distilled_spirits",
+        "labelPresentation": "fullLabel",
+        "ttbWarningText": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+        "boldWarningPhrase": "GOVERNMENT WARNING:"
+      },
+      "expectVerificationPass": true,
+      "approvedLabelSearchUrl": "https://data.texas.gov/dataset/Approved-Product-Label-Search/2cjh-3vae",
+      "tabcApprovedLabelFileLink": "https://storage.googleapis.com/tabc-public-labels/93a95c3bbf850c375449bade8df27277.pdf",
+      "userPhotoMatchesTabcRow": true
+    }
+  ]
+}

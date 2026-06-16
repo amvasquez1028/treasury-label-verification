@@ -1,0 +1,6 @@
+{
+  "file": "baseline-pass.png",
+  "ttbId": null,
+  "label": "Synthetic baseline (should pass)",
+  "source": "testdata/fixtures/baseline-01.png"
+}
