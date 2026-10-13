@@ -16,7 +16,7 @@ Alcohol beverage label verification portal for the [Treasury take-home assessmen
 | UX | CSV manifest intake, reviewer sample pack, sequential full-resolution verify, inline confidence commentary |
 | Backend | .NET 8 minimal API, ASP.NET Identity, rate limits, security headers |
 | Frontend | Next.js 15 static export served from API `wwwroot` |
-| Deploy | Azure App Service P2v3 + ACR, strict production probe gate (5/5 reviewer walkthrough) |
+| Deploy | Azure App Service (B1 since 2026-10-12; P2v3 for load) + ACR, strict production probe gate (5/5 reviewer walkthrough) |
 
 ---
 
@@ -100,6 +100,10 @@ cd treasury-label-verification-plan
 Post-deploy strict gate runs `scripts/_probe_production.py --strict` (5/5 single + UI sequential paths).
 
 Details: [docs/AZURE_DEPLOY.md](docs/AZURE_DEPLOY.md)
+
+### Hosting & cost (2026-10-12)
+
+On 2026-10-12 the App Service plan `label-verify-plan-westus2` was scaled down from Premium P2v3 (~$223/mo) to Basic B1 (~$13/mo) because the deployment was idle, and the duplicate registry `labelverify79931` was deleted. Expected cost is ~$18/mo. B1 has no autoscale or deployment slots, so scale back up before real load. See [docs/HOSTING.md](docs/HOSTING.md) for the scale-up commands.
 
 ---
 
